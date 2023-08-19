@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,20 +17,38 @@
 
     let score = 0;
     let wicket = 0;
-
-    function clickOne(){
-        alert("1 is clicked");
-    }
-
-    const handleAdd = (inc) =>{
-        score += inc;
-    // console.log(score);
-    }
-
+    
     const addOne = () =>{
         score += 1;
-        rootElement.render(<App/>);
-    console.log(score);
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
+    }
+    const addTwo = () =>{
+        score += 2;
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
+    }
+    const addThree = () =>{
+        score += 3;
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
+    }
+    const addFour = () =>{
+        score += 4;
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
+    }
+    const addFive = () =>{
+        score += 5;
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
+    }
+    const addSix = () =>{
+        score += 6;
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
+    }
+
+    const gotWicket = () =>{
+        
+        if(wicket <= 9){
+            wicket += 1;
+        }
+        rootElement.render(<App/>);// this is for re- rendering every time this function will called
     }
 
 
@@ -40,12 +59,12 @@
             <h2> Score:{score}/{wicket}</h2>
             <div>
                 <button onClick = {addOne}>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>Wicket</button>
+                <button onClick = {addTwo}>2</button>
+                <button onClick = {addThree}>3</button>
+                <button onClick = {addFour}>4</button>
+                <button onClick = {addFive}>5</button>
+                <button onClick = {addSix}>6</button>
+                <button id="out" onClick= {gotWicket}>Wicket</button>
             </div>
             </>
         )
