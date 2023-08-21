@@ -18,24 +18,27 @@
     let score = 0;
     let wicket = 0;
     let ballWiseRes = [];
+    let hit = 0;
+    let inputRef = React.createRef();
 
 // we can make a common function for all
     const addScore = (num) =>{
-        if(wicket <= 9){
-        ballWiseRes.push(num);
-        score += num;
+        // if(wicket <= 9){
+        // ballWiseRes.push(num);
+        // score += num;
+        hit = num;
         rootElement.render(<App/>);// this is for re- rendering every time this function will called
-        }
-        console.log(ballWiseRes);
+        // }
+        // console.log(ballWiseRes);
+        console.log(hit);
     }
 
     const gotWicket = () =>{
-        if(wicket <= 9){
-        ballWiseRes.push("W");
-        wicket += 1;
+        
+        hit = "W";
         rootElement.render(<App/>);// this is for re- rendering every time this function will called
-        }
-        console.log(ballWiseRes);
+        
+       
     }
 
     // components
@@ -62,14 +65,29 @@
             ))}
         </div>
     )
+
     function handleSubmit(event){
         event.preventDefault();
+        if(hit == "W"){
+            wicket += 1;
+        }else{
+        score += hit;
+        }
+        ballWiseRes.unshift(
+            // <span>{hit}{", "}{inputRef.current.value} !</span> //one way is to show is this
+            <span>{`${hit}, ${inputRef.current.value} !`} </span> 
+        );
+        hit = 0;
+        inputRef.current.value = "";
+        rootElement.render(<App/>);
+
+
     }
 
     const Form = () => (
         <form onSubmit= {handleSubmit}>
-            <input type="text"/>
-            <input type="text"/>
+            <input value={hit}/>
+            <input ref={inputRef} placeholder="Add a Comment" />
             <button id="submit">Submit</button>
         </form>
     )
@@ -78,16 +96,22 @@
 
     const App =() => (
             <>
-            <h1>Score Keeper</h1>
+            <h1 id="score">Score Keeper</h1>
             <h2> Score:{score}/{wicket}</h2>
             <ScoreButtons/>
             <br/>
             <Form/>
             <br/>
             <hr/>
-            </>
-        )
-    
+
+     <div>
+    {ballWiseRes.map((res,index) =>(
+        <p key={index}>{res}</p>
+    ))}
+    </div>
+    </>
+
+    )
 
     const rootElement = ReactDOM.createRoot(document.getElementById("root"))
     rootElement.render(<App/>);
